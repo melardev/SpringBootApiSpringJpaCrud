@@ -27,7 +27,7 @@ public class TodosController {
     private TodosRepository todosRepository;
 
     @GetMapping
-    public List<Todo> index() {
+    public Iterable<Todo> index() {
         return this.todosRepository.findAll();
     }
 
