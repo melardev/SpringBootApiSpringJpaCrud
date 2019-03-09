@@ -29,14 +29,26 @@ public class Todo {
     public Todo() {
     }
 
+    public Todo(Long id, String title, String description, Boolean completed, LocalDateTime createdAt, LocalDateTime updatedAt) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.completed = completed;
+        this.description = description;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
+
     public Todo(String title, String description) {
         this(title, description, false);
     }
 
     public Todo(String title, String description, boolean completed) {
-        this.title = title;
-        this.description = description;
-        this.completed = completed;
+        this(null, title, description, completed, null, null);
+    }
+
+    public Todo(Long id, String title, boolean completed, LocalDateTime createdAt, LocalDateTime updatedAt) {
+        this(id, title, null, completed, createdAt, updatedAt);
     }
 
     public void setId(Long id) {

@@ -12,6 +12,9 @@ import java.util.List;
 @Repository
 public interface TodosRepository extends CrudRepository<Todo, Long> {
 
+    @Query("select new Todo(t.id, t.title, t.completed, t.createdAt, t.updatedAt) from Todo t")
+    List<Todo> findAllHqlSummary();
+
     List<Todo> findByCompleted(boolean done);
 
     List<Todo> findByCompletedTrue();
@@ -26,7 +29,7 @@ public interface TodosRepository extends CrudRepository<Todo, Long> {
 
     List<Todo> findByDescriptionContains(String description);
 
-    @Query("select t from Todo t where t.completed = :completed")
+    @Query("select new Todo(t.id, t.title, t.completed, t.createdAt, t.updatedAt) from Todo t where t.completed = :completed")
     List<Todo> findByHqlCompletedIs(boolean completed);
 
     @Query("select t from Todo t where t.title like %:word%")

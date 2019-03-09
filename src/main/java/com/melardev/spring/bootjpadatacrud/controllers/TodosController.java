@@ -28,7 +28,7 @@ public class TodosController {
 
     @GetMapping
     public Iterable<Todo> index() {
-        return this.todosRepository.findAll();
+        return this.todosRepository.findAllHqlSummary();
     }
 
     @GetMapping("/{id}")
@@ -49,12 +49,12 @@ public class TodosController {
 
     @GetMapping("/pending")
     public List<Todo> getNotCompletedTodos() {
-        return this.todosRepository.findByCompletedFalse();
+        return this.todosRepository.findByHqlCompletedIs(false);
     }
 
     @GetMapping("/completed")
     public List<Todo> getCompletedTodos() {
-        return todosRepository.findByCompletedIsTrue();
+        return todosRepository.findByHqlCompletedIs(true);
     }
 
     @PostMapping
