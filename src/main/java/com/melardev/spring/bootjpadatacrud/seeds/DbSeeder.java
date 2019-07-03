@@ -6,6 +6,7 @@ import com.melardev.spring.bootjpadatacrud.repositories.TodosRepository;
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -27,20 +28,24 @@ public class DbSeeder implements CommandLineRunner {
     @Autowired
     DataSource dataSource;
 
+    @Autowired
+    Environment environment;
+
     @Override
     public void run(String... args) {
         System.out.printf("[+] We are using the following database connection string : %s\n" +
-                "Go ahead into http://localhost:8080/api/h2-console and paste that connection string,\nusername=user,password=password, to access" +
+                "Go ahead into http://localhost:" + environment.getProperty("server.port") + "/api/h2-console and paste that connection string,\nusername=user,password=password, to access" +
                 "the h2 database console ;)", ((HikariDataSource) dataSource).getJdbcUrl());
+        todosRepository.deleteAll();
         long todosCount = this.todosRepository.count();
         Faker faker = new Faker(new Random(System.currentTimeMillis()));
-        long todosToSeed = 43;
+        long todosToSeed = 15;
         todosToSeed -= todosCount;
 
 
         Date startDate, endDate;
         startDate = Date.from(LocalDateTime.of(2016, 1, 1, 0, 0).toInstant(ZoneOffset.UTC));
-        endDate = Date.from(LocalDateTime.of(2020, 1, 1, 0, 0).toInstant(ZoneOffset.UTC));
+        endDate = Date.from(LocalDateTime.of(2019, 1, 1, 0, 0).toInstant(ZoneOffset.UTC));
 
         LongStream.range(0, todosToSeed).forEach(i -> {
             Todo todo = new Todo(

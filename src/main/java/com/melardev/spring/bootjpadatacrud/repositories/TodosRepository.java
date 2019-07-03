@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface TodosRepository extends CrudRepository<Todo, Long> {
 
-    @Query("select new Todo(t.id, t.title, t.completed, t.createdAt, t.updatedAt) from Todo t")
+    @Query("select new Todo(t.id, t.title, t.completed, t.createdAt, t.updatedAt) from Todo t order by t.createdAt desc")
     List<Todo> findAllHqlSummary();
 
     List<Todo> findByCompleted(boolean done);

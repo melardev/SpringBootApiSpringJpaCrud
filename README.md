@@ -152,3 +152,4 @@ This client side E-commerce application is also implemented using other client s
 - [Youtube Channel](https://youtube.com/melardev)
 - [Blog](http://melardev.com)
 - [Twitter](https://twitter.com/@melardev)
+- [Instagram](https://instagram.com/melar_dev)
